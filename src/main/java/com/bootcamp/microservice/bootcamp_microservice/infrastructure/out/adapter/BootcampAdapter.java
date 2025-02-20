@@ -16,7 +16,7 @@ public class BootcampAdapter implements IBootcampPersistencePort {
     @Override
     public Mono<Void> saveBootcamp(Bootcamp bootcamp) {
         BootcampEntity entity = new BootcampEntity(
-                " ",
+                null,
                 bootcamp.getName(),
                 bootcamp.getDescription(),
                 bootcamp.getcapacities(),
