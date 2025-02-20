@@ -1,10 +1,12 @@
 package com.bootcamp.microservice.bootcamp_microservice.domain.ports.out;
 
+import com.bootcamp.microservice.bootcamp_microservice.domain.utils.CapacitiesId;
 import com.bootcamp.microservice.bootcamp_microservice.domain.utils.Capacity;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-import java.util.List;
 
 public interface ICapacityClientPort {
-    Flux<Capacity> listCapacities(List<Long> capacities);
+    Flux<Capacity> getCapacity(CapacitiesId capacitiesId);
+    Mono<Boolean> existsCapacities(CapacitiesId capacitiesId);
 }
