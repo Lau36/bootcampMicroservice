@@ -1,4 +1,4 @@
-package com.bootcamp.microservice.bootcamp_microservice.domain.utils;
+package com.bootcamp.microservice.bootcamp_microservice.domain.utils.constans;
 
 public class DomainConstans {
 

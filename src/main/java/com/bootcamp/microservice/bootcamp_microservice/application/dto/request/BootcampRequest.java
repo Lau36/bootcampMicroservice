@@ -1,4 +1,4 @@
-package com.bootcamp.microservice.bootcamp_microservice.application.dto;
+package com.bootcamp.microservice.bootcamp_microservice.application.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

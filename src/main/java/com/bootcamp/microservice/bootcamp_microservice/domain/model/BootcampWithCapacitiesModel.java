@@ -4,20 +4,20 @@ import com.bootcamp.microservice.bootcamp_microservice.domain.utils.Capacity;
 
 import java.util.List;
 
-public class Bootcamp {
-    private Long id;
+public class BootcampWithCapacitiesModel {
+    private String id;
     private String name;
     private String description;
     private List<Capacity> capacities;
 
-    public Bootcamp(Long id, String name, String description, List<Capacity> capacities) {
+    public BootcampWithCapacitiesModel(String id, String name, String description, List<Capacity> capacities) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.capacities = capacities;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
@@ -33,7 +33,7 @@ public class Bootcamp {
         return capacities;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
