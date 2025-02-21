@@ -1,20 +1,18 @@
 package com.bootcamp.microservice.bootcamp_microservice.domain.utils;
 
-import com.bootcamp.microservice.bootcamp_microservice.domain.model.BootcampWithCapacitiesModel;
-
 import java.util.List;
 
 public class Paginated {
     private int currentPage;
     private int totalPages;
     private long totalElements;
-    private List<BootcampWithCapacitiesModel> bootcampWithCapacitiesModels;
+    private List<BootcampWithCapacities> bootcampWithCapacities;
 
-    public Paginated(int currentPage, int totalPages, long totalElements, List<BootcampWithCapacitiesModel> bootcampWithCapacitiesModels) {
+    public Paginated(int currentPage, int totalPages, long totalElements, List<BootcampWithCapacities> bootcampWithCapacities) {
         this.currentPage = currentPage;
         this.totalPages = totalPages;
         this.totalElements = totalElements;
-        this.bootcampWithCapacitiesModels = bootcampWithCapacitiesModels;
+        this.bootcampWithCapacities = bootcampWithCapacities;
     }
 
     public int getCurrentPage() {
@@ -29,8 +27,8 @@ public class Paginated {
         return totalElements;
     }
 
-    public List<BootcampWithCapacitiesModel> getBootcamps() {
-        return bootcampWithCapacitiesModels;
+    public List<BootcampWithCapacities> getBootcamps() {
+        return bootcampWithCapacities;
     }
 
     public void setCurrentPage(int currentPage) {
@@ -45,7 +43,7 @@ public class Paginated {
         this.totalElements = totalElements;
     }
 
-    public void setBootcamps(List<BootcampWithCapacitiesModel> bootcampWithCapacitiesModels) {
-        this.bootcampWithCapacitiesModels = bootcampWithCapacitiesModels;
+    public void setBootcamps(List<BootcampWithCapacities> bootcampWithCapacities) {
+        this.bootcampWithCapacities = bootcampWithCapacities;
     }
 }

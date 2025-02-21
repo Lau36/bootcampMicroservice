@@ -2,14 +2,12 @@ package com.bootcamp.microservice.bootcamp_microservice.infrastructure.out.adapt
 
 import com.bootcamp.microservice.bootcamp_microservice.domain.ports.out.ICapacityClientPort;
 import com.bootcamp.microservice.bootcamp_microservice.domain.utils.CapacitiesId;
-import com.bootcamp.microservice.bootcamp_microservice.domain.utils.Capacity;
+import com.bootcamp.microservice.bootcamp_microservice.domain.utils.CapacityWithTechnologies;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.List;
 
 import static com.bootcamp.microservice.bootcamp_microservice.infrastructure.utils.constans.InfraConstans.*;
 
@@ -20,12 +18,12 @@ public class CapacityClientAdapter implements ICapacityClientPort {
 
 
     @Override
-    public Flux<Capacity> getCapacity(CapacitiesId capacitiesId) {
+    public Flux<CapacityWithTechnologies> getCapacity(CapacitiesId capacitiesId) {
         return webClient.post()
                 .uri(LIST_CAPACITIES_PATH)
                 .bodyValue(capacitiesId)
                 .retrieve()
-                .bodyToFlux(Capacity.class);
+                .bodyToFlux(CapacityWithTechnologies.class);
     }
 
     @Override

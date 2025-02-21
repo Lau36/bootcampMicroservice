@@ -1,6 +1,6 @@
 package com.bootcamp.microservice.bootcamp_microservice.infrastructure.out.adapter;
 
-import com.bootcamp.microservice.bootcamp_microservice.domain.model.BootcampWithCapacitiesModel;
+import com.bootcamp.microservice.bootcamp_microservice.domain.utils.BootcampWithCapacities;
 import com.bootcamp.microservice.bootcamp_microservice.domain.ports.out.IBootcampPersistencePort;
 import com.bootcamp.microservice.bootcamp_microservice.domain.utils.Paginated;
 import com.bootcamp.microservice.bootcamp_microservice.domain.utils.Pagination;
@@ -19,13 +19,13 @@ public class BootcampAdapter implements IBootcampPersistencePort {
     private final IBootcampRepository bootcampRepository;
 
     @Override
-    public Mono<Void> saveBootcamp(BootcampWithCapacitiesModel bootcampWithCapacitiesModel) {
+    public Mono<Void> saveBootcamp(BootcampWithCapacities bootcampWithCapacities) {
         BootcampEntity entity = new BootcampEntity(
                 null,
-                bootcampWithCapacitiesModel.getName(),
-                bootcampWithCapacitiesModel.getDescription(),
-                bootcampWithCapacitiesModel.getcapacities(),
-                bootcampWithCapacitiesModel.getcapacities().size()
+                bootcampWithCapacities.getName(),
+                bootcampWithCapacities.getDescription(),
+                bootcampWithCapacities.getcapacities(),
+                bootcampWithCapacities.getcapacities().size()
         );
         return bootcampRepository.save(entity).then();
     }
@@ -35,7 +35,7 @@ public class BootcampAdapter implements IBootcampPersistencePort {
         Sort sort = Sort.by(Sort.Direction.fromString(pagination.getSortDirection().name()), pagination.getSort());
         PageRequest pageable = PageRequest.of(pagination.getPage(), pagination.getSize(), sort);
 
-        Mono<List<BootcampWithCapacitiesModel>> bootcamps =
+        Mono<List<BootcampWithCapacities>> bootcamps =
                 bootcampRepository.findAllBy(pageable)
                         .map(this::toBootcamp)
                         .collectList();
@@ -57,7 +57,7 @@ public class BootcampAdapter implements IBootcampPersistencePort {
                 });
     }
 
-    public BootcampWithCapacitiesModel toBootcamp(BootcampEntity bootcampEntity) {
-        return new BootcampWithCapacitiesModel(bootcampEntity.getId(), bootcampEntity.getName(), bootcampEntity.getDescription(), bootcampEntity.getCapacities());
+    public BootcampWithCapacities toBootcamp(BootcampEntity bootcampEntity) {
+        return new BootcampWithCapacities(bootcampEntity.getId(), bootcampEntity.getName(), bootcampEntity.getDescription(), bootcampEntity.getCapacities());
     }
 }

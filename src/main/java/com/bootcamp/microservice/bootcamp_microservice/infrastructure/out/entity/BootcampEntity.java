@@ -1,6 +1,6 @@
 package com.bootcamp.microservice.bootcamp_microservice.infrastructure.out.entity;
 
-import com.bootcamp.microservice.bootcamp_microservice.domain.utils.Capacity;
+import com.bootcamp.microservice.bootcamp_microservice.domain.utils.CapacityWithTechnologies;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +19,7 @@ public class BootcampEntity {
     private String id;
     private String name;
     private String description;
-    private List<Capacity> capacities;
+    private List<CapacityWithTechnologies> capacities;
     private Integer capacitiesCount;
 }
 

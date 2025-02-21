@@ -3,7 +3,7 @@ package com.bootcamp.microservice.bootcamp_microservice.domain.useCase;
 import com.bootcamp.microservice.bootcamp_microservice.domain.exceptions.CapacitiesNumberExceededException;
 import com.bootcamp.microservice.bootcamp_microservice.domain.exceptions.CapacityDoesntExists;
 import com.bootcamp.microservice.bootcamp_microservice.domain.exceptions.DoesntHaveMinimunCapacitiesException;
-import com.bootcamp.microservice.bootcamp_microservice.domain.model.BootcampWithCapacitiesModel;
+import com.bootcamp.microservice.bootcamp_microservice.domain.utils.BootcampWithCapacities;
 import com.bootcamp.microservice.bootcamp_microservice.domain.model.BootcampModel;
 import com.bootcamp.microservice.bootcamp_microservice.domain.ports.in.IBootcampServicePort;
 import com.bootcamp.microservice.bootcamp_microservice.domain.ports.out.IBootcampPersistencePort;
@@ -39,14 +39,14 @@ public class BootcampUseCase implements IBootcampServicePort {
                     return capacityClientPort.getCapacity(capacitiesId)
                             .collectList()
                             .flatMap(capacities -> {
-                                BootcampWithCapacitiesModel bootcampWithCapacitiesModel = new BootcampWithCapacitiesModel(
+                                BootcampWithCapacities bootcampWithCapacities = new BootcampWithCapacities(
                                         null,
                                         bootcampModel.getName(),
                                         bootcampModel.getDescription(),
                                         capacities
                                 );
 
-                                return bootcampPersistencePort.saveBootcamp(bootcampWithCapacitiesModel).then();
+                                return bootcampPersistencePort.saveBootcamp(bootcampWithCapacities).then();
                             });
                 });
     }

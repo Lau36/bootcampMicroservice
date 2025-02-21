@@ -2,12 +2,12 @@ package com.bootcamp.microservice.bootcamp_microservice.domain.utils;
 
 import java.util.List;
 
-public class Capacity {
+public class CapacityWithTechnologies {
     private Long id;
     private String name;
     private List<Technology> technologiesList;
 
-    public Capacity(Long id, String name, List<Technology> technologiesList) {
+    public CapacityWithTechnologies(Long id, String name, List<Technology> technologiesList) {
         this.id = id;
         this.name = name;
         this.technologiesList = technologiesList;

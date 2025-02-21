@@ -1,16 +1,14 @@
-package com.bootcamp.microservice.bootcamp_microservice.domain.model;
-
-import com.bootcamp.microservice.bootcamp_microservice.domain.utils.Capacity;
+package com.bootcamp.microservice.bootcamp_microservice.domain.utils;
 
 import java.util.List;
 
-public class BootcampWithCapacitiesModel {
+public class BootcampWithCapacities {
     private String id;
     private String name;
     private String description;
-    private List<Capacity> capacities;
+    private List<CapacityWithTechnologies> capacities;
 
-    public BootcampWithCapacitiesModel(String id, String name, String description, List<Capacity> capacities) {
+    public BootcampWithCapacities(String id, String name, String description, List<CapacityWithTechnologies> capacities) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -29,7 +27,7 @@ public class BootcampWithCapacitiesModel {
         return description;
     }
 
-    public List<Capacity> getcapacities() {
+    public List<CapacityWithTechnologies> getcapacities() {
         return capacities;
     }
 
@@ -45,7 +43,7 @@ public class BootcampWithCapacitiesModel {
         this.description = description;
     }
 
-    public void setcapacities(List<Capacity> capacities) {
+    public void setcapacities(List<CapacityWithTechnologies> capacities) {
         this.capacities = capacities;
     }
 }

@@ -4,7 +4,7 @@ import com.bootcamp.microservice.bootcamp_microservice.domain.exceptions.Capacit
 import com.bootcamp.microservice.bootcamp_microservice.domain.exceptions.CapacityDoesntExists;
 import com.bootcamp.microservice.bootcamp_microservice.domain.exceptions.DoesntHaveMinimunCapacitiesException;
 import com.bootcamp.microservice.bootcamp_microservice.domain.model.BootcampModel;
-import com.bootcamp.microservice.bootcamp_microservice.domain.model.BootcampWithCapacitiesModel;
+import com.bootcamp.microservice.bootcamp_microservice.domain.utils.BootcampWithCapacities;
 import com.bootcamp.microservice.bootcamp_microservice.domain.ports.out.IBootcampPersistencePort;
 import com.bootcamp.microservice.bootcamp_microservice.domain.ports.out.ICapacityClientPort;
 import com.bootcamp.microservice.bootcamp_microservice.domain.useCase.BootcampUseCase;
@@ -56,14 +56,14 @@ public class BootcampUseCaseTest {
     void createBootcamp_Success() {
         
         List<Technology> technologies = List.of(new Technology(1L, "Java"), new Technology(2L, "Spring Boot"));
-        List<Capacity> capacities = List.of(
-                new Capacity(1L, "Backend", technologies),
-                new Capacity(2L, "Frontend", technologies)
+        List<CapacityWithTechnologies> capacities = List.of(
+                new CapacityWithTechnologies(1L, "Backend", technologies),
+                new CapacityWithTechnologies(2L, "Frontend", technologies)
         );
 
         Mockito.when(capacityClientPort.existsCapacities(ArgumentMatchers.any(CapacitiesId.class))).thenReturn(Mono.just(true));
         Mockito.when(capacityClientPort.getCapacity(ArgumentMatchers.any(CapacitiesId.class))).thenReturn(Flux.fromIterable(capacities));
-        Mockito.when(bootcampPersistencePort.saveBootcamp(ArgumentMatchers.any(BootcampWithCapacitiesModel.class)))
+        Mockito.when(bootcampPersistencePort.saveBootcamp(ArgumentMatchers.any(BootcampWithCapacities.class)))
                 .thenReturn(Mono.empty());
 
         Mono<Void> result = bootcampUseCase.createBootcamp(bootcampModel);
@@ -73,7 +73,7 @@ public class BootcampUseCaseTest {
 
         verify(capacityClientPort, times(1)).existsCapacities(ArgumentMatchers.any(CapacitiesId.class));
         verify(capacityClientPort, times(1)).getCapacity(ArgumentMatchers.any(CapacitiesId.class));
-        verify(bootcampPersistencePort, times(1)).saveBootcamp(ArgumentMatchers.any(BootcampWithCapacitiesModel.class));
+        verify(bootcampPersistencePort, times(1)).saveBootcamp(ArgumentMatchers.any(BootcampWithCapacities.class));
     }
 
 
@@ -81,8 +81,8 @@ public class BootcampUseCaseTest {
     void getAllBootcampsWithPagination(){
         Pagination pagination = new Pagination(0, 2, "name", SortDirection.ASC);
         List<Technology> technologies = List.of(new Technology(1L, "Technology 1"));
-        List<Capacity> capacities = List.of(new Capacity(1L, "capacidad 1", technologies));
-        BootcampWithCapacitiesModel model = new BootcampWithCapacitiesModel("id", "bootcamp 1", "descriptioon 1", capacities);
+        List<CapacityWithTechnologies> capacities = List.of(new CapacityWithTechnologies(1L, "capacidad 1", technologies));
+        BootcampWithCapacities model = new BootcampWithCapacities("id", "bootcamp 1", "descriptioon 1", capacities);
         Paginated paginated = new Paginated(0, 1, 1, List.of(model));
 
         Mockito.when(bootcampPersistencePort.getAllBootcampsWithPagination(pagination)).thenReturn(Mono.just(paginated));
